@@ -2,6 +2,7 @@ package com.biz.board;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -51,6 +52,7 @@ public class BoardServlet extends HttpServlet {
         out.println("<html>");
         out.println("<body>");
         out.println("<h2>this View callList</h2>");
+        out.print("오늘의 날짜 :" + LocalDate.now());
         out.println("<h3>HTML</h3>");
         out.println("</body>");
         out.println("</html>");

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app>
+
+	<servlet>
+		<servlet-name>controller</servlet-name>
+		<servlet-class>com.mf.web.MasterController
+		</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>controller</servlet-name>
+		<url-pattern>/controller/*</url-pattern>
+	</servlet-mapping>
+
+
+</web-app>

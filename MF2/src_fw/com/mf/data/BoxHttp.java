@@ -25,7 +25,7 @@ public class BoxHttp extends Box{
     }
 
     @Override
-    public Object get(String key) throws ServletException, IOException {
+    public Object get(String key){
 
         /**
          *  서비스 로직에서 가공된 Request를 선순위로 둔다.

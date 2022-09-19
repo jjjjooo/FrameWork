@@ -40,17 +40,17 @@ public class MasterController extends HttpServlet {
             if ("/callList".equals(pathInfo)) {
 
                 Board board = new Board();
-                jspUrl = board.callList(request);
+                jspUrl = board.callList();
 
             } else if ("/callWrite".contentEquals(pathInfo)) {
 
                 Board board = new Board();
-                jspUrl = board.callWrite(request);
+                jspUrl = board.callWrite();
 
             } else if ("/exeWrite".contentEquals(pathInfo)) {
 
                 Board board = new Board();
-                jspUrl = board.exeWrite(request);
+                jspUrl = board.exeWrite();
 
             }
 

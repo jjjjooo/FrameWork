@@ -17,6 +17,6 @@ public abstract class Box implements Serializable {
     /**
      * 출력
      */
-    public abstract Object get(String key) throws ServletException, IOException;
+    public abstract Object get(String key);
 
 }

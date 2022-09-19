@@ -1,5 +1,8 @@
 package com.biz.board;
 
+import com.mf.data.Box;
+import com.mf.web.BoxContext;
+
 import javax.servlet.http.HttpServletRequest;
 
 
@@ -10,29 +13,39 @@ import javax.servlet.http.HttpServletRequest;
 public class Board {
 
 
-    public String callList(HttpServletRequest request) {
+    public String callList() {
 
-        String findStr = request.getParameter("findStr");
-
-        request.setAttribute("list", "list =[" + findStr + "]");
+        Box box = BoxContext.get();
 
         /**
-         *
-        */
+         *  box의 get(),set() 서비스로직을 실행 중...
+         *  findStr을 찾아서 가공해서 list로 DB에 넣는다 정도로 생각
+         */
+        String findStr = (String) box.get("findStr");
+        box.set("list", "list =[" + findStr + "]");
 
         return "/WEB-INF/classes/com/biz/board/jsp/list.jsp";
     }
 
-    public String callWrite(HttpServletRequest request) {
+    public String callWrite() {
 
         return "/WEB-INF/classes/com/biz/board/jsp/write.jsp";
 
     }
 
-    public String exeWrite(HttpServletRequest request) {
+    public String exeWrite() {
 
-        request.setAttribute("exeWriteResult", "ok");
+        /**
+         *  DB에 저장하는 함수
+         */
+        Box box = BoxContext.get();
 
-        return callList(request);
+        String txt = (String) box.get("txt");
+
+        System.out.println("exeWrite [" + txt + "]");
+
+        box.set("exeWriteResult", "ok");
+
+        return callList();
     }
 }

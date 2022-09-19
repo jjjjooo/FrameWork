@@ -1,6 +1,8 @@
 package com.mf.web;
 
 import com.biz.board.Board;
+import com.mf.data.Box;
+import com.mf.data.BoxHttp;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -27,36 +29,48 @@ public class MasterController extends HttpServlet {
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    
-        String pathInfo = request.getPathInfo();
-        String jspUrl = null;
 
-        if ("/callList".equals(pathInfo)) {
+        Box box = new BoxHttp(request);
+        BoxContext.set(box);
 
-            Board board = new Board();
-            jspUrl = board.callList(request);
+        try{
+            String pathInfo = request.getPathInfo();
+            String jspUrl = null;
 
-        } else if ("/callWrite".contentEquals(pathInfo)) {
+            if ("/callList".equals(pathInfo)) {
 
-            Board board = new Board();
-            jspUrl = board.callWrite(request);
+                Board board = new Board();
+                jspUrl = board.callList(request);
 
-        } else if ("/exeWrite".contentEquals(pathInfo)) {
+            } else if ("/callWrite".contentEquals(pathInfo)) {
 
-            Board board = new Board();
-            jspUrl = board.exeWrite(request);
+                Board board = new Board();
+                jspUrl = board.callWrite(request);
 
+            } else if ("/exeWrite".contentEquals(pathInfo)) {
+
+                Board board = new Board();
+                jspUrl = board.exeWrite(request);
+
+            }
+
+            if (jspUrl == null) {
+                throw new ServletException();
+            }
+
+            /**
+             *
+             * */
+            RequestDispatcher dispatcher = request.getRequestDispatcher(jspUrl);
+            dispatcher.forward(request, response);
+        } catch (Exception e){
+            e.printStackTrace();
+        } finally {
+            BoxContext.remove();
         }
 
-        if (jspUrl == null) {
-            throw new ServletException();
-        }
 
-        /**
-         *
-         * */
-        RequestDispatcher dispatcher = request.getRequestDispatcher(jspUrl);
-        dispatcher.forward(request, response);
+
     }
 
 }
